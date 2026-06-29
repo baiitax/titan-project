@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kano South Accountability Card UI Deck</title>
+  <style>
+    :root {
+      --emerald: #006633;
+      --emerald-dark: #003f26;
+      --mint: #e6f2ed;
+      --mint-2: #cce5da;
+      --cream: #fbf7ed;
+      --gold: #d9a441;
+      --charcoal: #222222;
+      --muted: #66736d;
+      --white: #ffffff;
+      --danger: #b42318;
+      --shadow: 0 24px 70px rgba(0,0,0,.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0,102,51,.22), transparent 30%),
+        linear-gradient(135deg, #f4f8f5, #e8eee9 45%, #f9f4e8);
+      color: var(--charcoal);
+      padding: 32px;
+    }
+
+    .page-header {
+      max-width: 1180px;
+      margin: 0 auto 28px auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      color: var(--emerald);
+      font-weight: 900;
+      letter-spacing: .13em;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: .95;
+      color: var(--emerald-dark);
+      letter-spacing: -1.8px;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 780px;
+      line-height: 1.55;
+    }
+
+    .spec-pill {
+      padding: 12px 16px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(0,102,51,.18);
+      border-radius: 999px;
+      font-weight: 800;
+      color: var(--emerald-dark);
+      white-space: nowrap;
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+
+    .deck {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 26px;
+      align-items: start;
+    }
+
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-label {
+      font-weight: 900;
+      color: var(--emerald-dark);
+      letter-spacing: -.2px;
+      font-size: 14px;
+      padding-left: 4px;
+    }
+
+    .story-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      background: var(--cream);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .story-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 8%, rgba(217,164,65,.45), transparent 18%),
+        radial-gradient(circle at 85% 20%, rgba(0,102,51,.35), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.08));
+      z-index: 0;
+    }
+
+    .top-strip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 74px;
+      background: rgba(255,255,255,.94);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 26px;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      z-index: 5;
+    }
+
+    .brand {
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: .09em;
+      line-height: 1.2;
+      color: var(--emerald-dark);
+      text-transform: uppercase;
+    }
+
+    .seal {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--emerald);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      font-size: 15px;
+      box-shadow: 0 8px 20px rgba(0,102,51,.26);
+    }
+
+    .visual {
+      position: absolute;
+      inset: 74px 0 130px;
+      z-index: 1;
+      overflow: hidden;
+      background: linear-gradient(150deg, #d7e7dc, #f5ead0);
+    }
+
+    .visual svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.42));
+    }
+
+    .headline-block {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      top: 102px;
+      z-index: 3;
+      color: white;
+      text-shadow: 0 10px 30px rgba(0,0,0,.42);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0,102,51,.88);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .headline {
+      margin: 0;
+      font-size: clamp(31px, 9.1vw, 48px);
+      line-height: .9;
+      letter-spacing: -2.2px;
+      font-weight: 950;
+      max-width: 92%;
+    }
+
+    .overlay-box {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 112px;
+      z-index: 6;
+      background: rgba(255,255,255,.96);
+      border-radius: 24px;
+      padding: 22px 20px 18px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.75);
+    }
+
+    .big-number {
+      font-size: 34px;
+      line-height: .95;
+      letter-spacing: -1.4px;
+      font-weight: 950;
+      color: var(--emerald-dark);
+      margin-bottom: 10px;
+    }
+
+    .main-copy {
+      font-size: 17px;
+      line-height: 1.22;
+      letter-spacing: -.35px;
+      font-weight: 850;
+      color: var(--charcoal);
+      margin: 0;
+    }
+
+    .bullets {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .bullet {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 8px;
+      font-size: 13px;
+      line-height: 1.25;
+      font-weight: 780;
+      color: #2f3934;
+    }
+
+    .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--mint);
+      color: var(--emerald);
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 950;
+    }
+
+    .source-note {
+      margin-top: 14px;
+      background: var(--mint);
+      color: var(--emerald-dark);
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 10px;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    .footer-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 98px;
+      background: var(--emerald);
+      color: white;
+      z-index: 8;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 16px 24px;
+    }
+
+    .slogan {
+      font-weight: 950;
+      font-size: 16px;
+      line-height: 1.05;
+      letter-spacing: -.3px;
+      text-transform: uppercase;
+    }
+
+    .micro {
+      margin-top: 4px;
+      color: rgba(255,255,255,.78);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .qr {
+      width: 52px;
+      height: 52px;
+      background:
+        linear-gradient(90deg, #fff 6px, transparent 6px) 0 0/13px 13px,
+        linear-gradient(#fff 6px, transparent 6px) 0 0/13px 13px,
+        rgba(255,255,255,.15);
+      border: 5px solid rgba(255,255,255,.9);
+      border-radius: 8px;
+      opacity: .95;
+    }
+
+    .cream-card { background: #fbf7ed; }
+    .dark-card { background: #082f22; }
+    .dark-card .top-strip { background: rgba(255,255,255,.96); }
+    .dark-card .overlay-box { background: rgba(7,37,27,.94); border-color: rgba(255,255,255,.12); }
+    .dark-card .big-number { color: #f3d28b; }
+    .dark-card .main-copy, .dark-card .bullet { color: white; }
+    .dark-card .source-note { background: rgba(230,242,237,.12); color: #d7f4e6; }
+    .dark-card .dot { background: #f3d28b; color: #082f22; }
+
+    .red-accent .tag { background: rgba(180,35,24,.92); }
+    .red-accent .big-number { color: var(--danger); }
+    .red-accent .footer-bar { background: #8c1d18; }
+
+    .split-card .visual { background: linear-gradient(90deg, #dbe9df 0 50%, #efe0bc 50%); }
+    .split-card .headline { max-width: 100%; }
+
+    .design-notes {
+      max-width: 1180px;
+      margin: 34px auto 0;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(0,102,51,.15);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 16px 44px rgba(0,0,0,.08);
+    }
+
+    .design-notes h2 { margin: 0 0 10px; color: var(--emerald-dark); }
+    .design-notes p, .design-notes li { color: #405047; line-height: 1.55; font-size: 14px; }
+    .design-notes code { background: var(--mint); padding: 2px 6px; border-radius: 6px; }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .page-header, .design-notes, .card-label { display: none; }
+      .deck { display: block; max-width: none; }
+      .card-wrap { page-break-after: always; margin: 0; }
+      .story-card { width: 100vw; height: 100vh; border-radius: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <div class="eyebrow">Senior Design System / 9:16 Political Accountability Cards</div>
+      <h1>Kano South Card UI Deck</h1>
+      <p class="subtitle">A polished, mobile-first visual system for WhatsApp Status, Facebook Stories, TikTok covers, Telegram posts, and field media teams. The copy is evidence-led and framed as public accountability, not personal insult.</p>
+    </div>
+    <div class="spec-pill">1080×1920 Ready • 9:16</div>
+  </header>
+
+  <main class="deck">
+    <!-- CARD 1 -->
+    <section class="card-wrap">
+      <div class="card-label">Card 01 — Road Accountability Hero</div>
+      <article class="story-card red-accent">
+        <div class="top-strip">
+          <div class="brand">Kano South Citizens<br>Accountability Desk</div>
+          <div class="seal">KS</div>
+        </div>
+        <div class="visual">
+          <svg viewBox="0 0 900 1400" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="roadSky" x1="0" x2="1" y1="0" y2="1">
+                <stop stop-color="#cfded5" offset="0"/><stop stop-color="#e8c572" offset="1"/>
+              </linearGradient>
+            </defs>
+            <rect width="900" height="1400" fill="url(#roadSky)"/>
+            <path d="M0 1120 C180 930 300 800 450 610 C610 800 760 960 900 1120 L900 1400 L0 1400 Z" fill="#403a32"/>
+            <path d="M420 660 L480 660 L590 1400 L310 1400 Z" fill="#20201e" opacity=".86"/>
+            <path d="M448 710 L456 710 L448 780 L440 780 Z M436 850 L449 850 L432 950 L418 950 Z M410 1040 L432 1040 L390 1200 L365 1200 Z" fill="#f6d66b"/>
+            <circle cx="130" cy="250" r="95" fill="#e7b34d" opacity=".72"/>
+            <path d="M50 980 C180 930 250 930 380 980" stroke="#766b5c" stroke-width="18" fill="none" opacity=".5"/>
+            <path d="M530 940 C640 890 740 900 850 970" stroke="#766b5c" stroke-width="18" fill="none" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="headline-block">
+          <div class="tag">Road money trail</div>
+          <h2 class="headline">A Motion Is Not Asphalt.</h2>
+        </div>
+        <div class="overlay-box">
+          <div class="big-number">₦124.4bn</div>
+          <p class="main-copy">Reported re-award for Kano–Maiduguri Road Section 1. Now show release, mobilization, site progress and completion schedule.</p>
+          <div class="bullets">
+            <div class="bullet"><span class="dot">?</span><span>How much has been cash-backed and released?</span></div>
+            <div class="bullet"><span class="dot">?</span><span>How many kilometres are completed after re-award?</span></div>
+          </div>
+          <div class="source-note">Reality check: Public reports cite ₦124.4bn re-award and 3-year timeline. Source: Leadership, April 2025.</div>
+        </div>
+        <div class="footer-bar">
+          <div><div class="slogan">Kano South Wants Receipts, Not Noise.</div><div class="micro">HUJJA MUKE SO, BA HAYANIYA BA</div></div>
+          <div class="qr"></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- CARD 2 -->
+    <section class="card-wrap">
+      <div class="card-label">Card 02 — FAAC Accountability Hero</div>
+      <article class="story-card dark-card">
+        <div class="top-strip">
+          <div class="brand">Kano South Citizens<br>Accountability Desk</div>
+          <div class="seal">₦</div>
+        </div>
+        <div class="visual">
+          <svg viewBox="0 0 900 1400" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="900" height="1400" fill="#0b4a35"/>
+            <circle cx="760" cy="170" r="180" fill="#d9a441" opacity=".55"/>
+            <circle cx="120" cy="460" r="230" fill="#006633" opacity=".65"/>
+            <path d="M0 960 C180 870 310 900 450 830 C620 746 760 800 900 710 L900 1400 L0 1400 Z" fill="#e0d1a8" opacity=".86"/>
+            <path d="M90 980 L810 980" stroke="#4d3d22" stroke-width="20" opacity=".25"/>
+            <path d="M180 1110 L720 1110" stroke="#4d3d22" stroke-width="15" opacity=".18"/>
+            <g opacity=".9">
+              <rect x="130" y="620" width="135" height="95" rx="13" fill="#f7f0dc"/>
+              <rect x="308" y="570" width="135" height="145" rx="13" fill="#f7f0dc"/>
+              <rect x="486" y="505" width="135" height="210" rx="13" fill="#f7f0dc"/>
+              <rect x="664" y="430" width="135" height="285" rx="13" fill="#f7f0dc"/>
+            </g>
+          </svg>
+        </div>
+        <div class="headline-block">
+          <div class="tag">Public money</div>
+          <h2 class="headline">FAAC Increased. What Reached The People?</h2>
+        </div>
+        <div class="overlay-box">
+          <div class="big-number">₦181.2bn</div>
+          <p class="main-copy">Reported FAAC allocation to Kano’s 44 LGAs between January and August 2025. Where is the LGA-by-LGA impact?</p>
+          <div class="bullets">
+            <div class="bullet"><span class="dot">1</span><span>What reached farmers, clinics, water and rural roads?</span></div>
+            <div class="bullet"><span class="dot">2</span><span>Where is the Kano South accountability forum?</span></div>
+          </div>
+          <div class="source-note">Reality check: Kano LGAs reportedly averaged about ₦22.7bn monthly Jan–Aug 2025. Source: SolaceBase FAAC analysis.</div>
+        </div>
+        <div class="footer-bar">
+          <div><div class="slogan">Track The Money. Show The Impact.</div><div class="micro">KUDI YA SHIGO — INA AMFANIN TALAKA?</div></div>
+          <div class="qr"></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- CARD 3 -->
+    <section class="card-wrap">
+      <div class="card-label">Card 03 — Wudil–Gaya Progress Dashboard Demand</div>
+      <article class="story-card cream-card">
+        <div class="top-strip">
+          <div class="brand">Kano South Citizens<br>Accountability Desk</div>
+          <div class="seal">WG</div>
+        </div>
+        <div class="visual">
+          <svg viewBox="0 0 900 1400" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="900" height="1400" fill="#efe4c9"/>
+            <path d="M0 760 C230 640 330 700 500 560 C640 450 760 430 900 360 L900 1400 L0 1400 Z" fill="#b8cebd"/>
+            <rect x="72" y="220" width="756" height="450" rx="36" fill="#ffffff" opacity=".78"/>
+            <path d="M140 590 L760 590" stroke="#006633" stroke-width="26" stroke-linecap="round" opacity=".25"/>
+            <path d="M140 590 L470 590" stroke="#006633" stroke-width="26" stroke-linecap="round"/>
+            <circle cx="470" cy="590" r="42" fill="#d9a441"/>
+            <path d="M170 340 H730 M170 430 H620 M170 520 H690" stroke="#74847b" stroke-width="22" stroke-linecap="round" opacity=".45"/>
+            <path d="M0 1180 C260 1080 450 1110 900 980 L900 1400 L0 1400 Z" fill="#3c3a33" opacity=".9"/>
+          </svg>
+        </div>
+        <div class="headline-block">
+          <div class="tag">Monthly progress</div>
+          <h2 class="headline">Where Is The Project Dashboard?</h2>
+        </div>
+        <div class="overlay-box">
+          <div class="big-number">3 years</div>
+          <p class="main-copy">If the new timeline is three years, citizens deserve a public monthly progress tracker.</p>
+          <div class="bullets">
+            <div class="bullet"><span class="dot">✓</span><span>Amount released and paid</span></div>
+            <div class="bullet"><span class="dot">✓</span><span>Contractor work schedule</span></div>
+            <div class="bullet"><span class="dot">✓</span><span>Kilometres completed each month</span></div>
+          </div>
+          <div class="source-note">Use in Wudil, Gaya, Ajingi, Garko, Albasu, Takai and transport union channels.</div>
+        </div>
+        <div class="footer-bar">
+          <div><div class="slogan">A Re-Award Is Not Completion.</div><div class="micro">A NUNA MANA AIKIN DA AKA YI</div></div>
+          <div class="qr"></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- CARD 4 -->
+    <section class="card-wrap">
+      <div class="card-label">Card 04 — Agriculture / Farmer Variant</div>
+      <article class="story-card split-card">
+        <div class="top-strip">
+          <div class="brand">Kano South Citizens<br>Accountability Desk</div>
+          <div class="seal">AG</div>
+        </div>
+        <div class="visual">
+          <svg viewBox="0 0 900 1400" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="900" height="1400" fill="#e6f2ed"/>
+            <path d="M0 600 C130 540 270 560 450 500 C610 445 760 430 900 350 L900 1400 L0 1400 Z" fill="#d9c58f"/>
+            <g opacity=".45" stroke="#765d2c" stroke-width="14">
+              <path d="M0 760 C200 710 360 725 900 650"/><path d="M0 860 C230 805 420 830 900 745"/><path d="M0 960 C260 905 470 930 900 850"/>
+            </g>
+            <circle cx="680" cy="260" r="120" fill="#d9a441" opacity=".7"/>
+            <path d="M230 540 C230 430 310 360 400 360 C520 360 600 450 600 560" fill="none" stroke="#006633" stroke-width="34" stroke-linecap="round" opacity=".72"/>
+            <rect x="278" y="535" width="270" height="330" rx="32" fill="#ffffff" opacity=".78"/>
+            <path d="M330 640 H495 M330 715 H470 M330 790 H505" stroke="#006633" stroke-width="24" stroke-linecap="round" opacity=".55"/>
+          </svg>
+        </div>
+        <div class="headline-block">
+          <div class="tag">Farmers ask</div>
+          <h2 class="headline">More Allocation. Same Fertilizer Pain?</h2>
+        </div>
+        <div class="overlay-box">
+          <div class="big-number">Bunkure • Bebeji • Tudun Wada</div>
+          <p class="main-copy">If public inflows increased, what reached agriculture, irrigation, input access and rural market roads?</p>
+          <div class="bullets">
+            <div class="bullet"><span class="dot">?</span><span>Where is transparent input support?</span></div>
+            <div class="bullet"><span class="dot">?</span><span>Where are irrigation and access-road interventions?</span></div>
+          </div>
+          <div class="source-note">Reality check: Research on Bunkure rice farmers identified inadequate fertilizer and capital as major constraints.</div>
+        </div>
+        <div class="footer-bar">
+          <div><div class="slogan">FAAC Must Reach The Farm.</div><div class="micro">TAKI • RUWA • HANYA • KASUWA</div></div>
+          <div class="qr"></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- CARD 5 -->
+    <section class="card-wrap">
+      <div class="card-label">Card 05 — Master Slogan / Brand Anchor</div>
+      <article class="story-card dark-card">
+        <div class="top-strip">
+          <div class="brand">Kano South Citizens<br>Accountability Desk</div>
+          <div class="seal">!</div>
+        </div>
+        <div class="visual">
+          <svg viewBox="0 0 900 1400" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="900" height="1400" fill="#063d2c"/>
+            <circle cx="450" cy="540" r="330" fill="#006633" opacity=".75"/>
+            <circle cx="450" cy="540" r="220" fill="#d9a441" opacity=".75"/>
+            <circle cx="450" cy="540" r="108" fill="#ffffff" opacity=".92"/>
+            <path d="M120 950 H780" stroke="#fff" stroke-width="28" opacity=".16" stroke-linecap="round"/>
+            <path d="M200 1040 H700" stroke="#fff" stroke-width="22" opacity=".12" stroke-linecap="round"/>
+            <path d="M270 1130 H630" stroke="#fff" stroke-width="18" opacity=".10" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="headline-block" style="top:150px; text-align:center; left:30px; right:30px;">
+          <div class="tag">Core message</div>
+          <h2 class="headline" style="max-width:100%; font-size:58px;">Hujja Muke So, Ba Hayaniya Ba.</h2>
+        </div>
+        <div class="overlay-box">
+          <div class="big-number">Receipts, Not Noise.</div>
+          <p class="main-copy">Roads require release and execution. Public allocations require visible impact. Kano South deserves measurable representation.</p>
+          <div class="source-note">Use as the closing card in every WhatsApp/TikTok carousel.</div>
+        </div>
+        <div class="footer-bar">
+          <div><div class="slogan">Kano Ta Kudu Na Bukatar Kwarewa Da Mutunci.</div><div class="micro">DAGA MAGANA ZUWA AIKI</div></div>
+          <div class="qr"></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- CARD 6 -->
+    <section class="card-wrap">
+      <div class="card-label">Card 06 — Public Questions Checklist</div>
+      <article class="story-card cream-card">
+        <div class="top-strip">
+          <div class="brand">Kano South Citizens<br>Accountability Desk</div>
+          <div class="seal">Q</div>
+        </div>
+        <div class="visual">
+          <svg viewBox="0 0 900 1400" preserveAspectRatio="none" aria-hidden="true">
+            <rect width="900" height="1400" fill="#f8f2e4"/>
+            <path d="M0 0 H900 V540 C710 470 600 510 450 450 C260 380 150 410 0 360 Z" fill="#dcebe2"/>
+            <rect x="95" y="160" width="710" height="760" rx="42" fill="#ffffff" opacity=".88"/>
+            <g stroke="#006633" stroke-width="20" stroke-linecap="round" opacity=".55">
+              <path d="M180 300 H720"/><path d="M180 420 H690"/><path d="M180 540 H730"/><path d="M180 660 H650"/><path d="M180 780 H700"/>
+            </g>
+            <g fill="#d9a441"><circle cx="145" cy="300" r="22"/><circle cx="145" cy="420" r="22"/><circle cx="145" cy="540" r="22"/><circle cx="145" cy="660" r="22"/><circle cx="145" cy="780" r="22"/></g>
+            <path d="M0 1080 C210 1010 410 1050 900 930 L900 1400 L0 1400 Z" fill="#006633" opacity=".18"/>
+          </svg>
+        </div>
+        <div class="headline-block">
+          <div class="tag">Ask calmly</div>
+          <h2 class="headline">Five Public Questions.</h2>
+        </div>
+        <div class="overlay-box">
+          <div class="big-number">No insult. Just documents.</div>
+          <div class="bullets">
+            <div class="bullet"><span class="dot">1</span><span>How much was released for the road?</span></div>
+            <div class="bullet"><span class="dot">2</span><span>How much was paid to the contractor?</span></div>
+            <div class="bullet"><span class="dot">3</span><span>What kilometre has been completed?</span></div>
+            <div class="bullet"><span class="dot">4</span><span>What did each LGA receive?</span></div>
+            <div class="bullet"><span class="dot">5</span><span>What impact reached ordinary people?</span></div>
+          </div>
+          <div class="source-note">Best for radio-show screenshots, town halls and volunteer training groups.</div>
+        </div>
+        <div class="footer-bar">
+          <div><div class="slogan">Show The Money Trail.</div><div class="micro">A NUNA HUJJA A FILI</div></div>
+          <div class="qr"></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <section class="design-notes">
+    <h2>Design Notes</h2>
+    <ul>
+      <li><strong>Format:</strong> Each card uses a 9:16 vertical ratio suitable for WhatsApp Status, Facebook Stories, TikTok covers and Telegram.</li>
+      <li><strong>Brand colors:</strong> Emerald <code>#006633</code>, mint <code>#E6F2ED</code>, charcoal <code>#222222</code>, gold <code>#D9A441</code>.</li>
+      <li><strong>Copy discipline:</strong> The designs ask for documents and public proof. They avoid legally risky accusations.</li>
+      <li><strong>Export:</strong> Open this file in Chrome, zoom to the desired card, screenshot/export at 1080×1920. You can also print to PDF; each card is prepared for page breaks in print mode.</li>
+    </ul>
+  </section>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0630fd8da6b001f',t:'MTc4MDUzNTQ2OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
